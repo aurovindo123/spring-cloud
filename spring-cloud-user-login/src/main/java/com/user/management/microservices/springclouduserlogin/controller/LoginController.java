@@ -3,6 +3,7 @@ package com.user.management.microservices.springclouduserlogin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +28,11 @@ public class LoginController {
 		ModelAndView mav = new  ModelAndView();
 		boolean flag = service.loginWithCredential(userName,pass);
 		if(flag) {
+			mav.setStatus(HttpStatus.ACCEPTED);
 			mav.setViewName("startPage");
 		}else {
-			mav.setViewName("error");
+			mav.setStatus(HttpStatus.BAD_REQUEST);
+			mav.setViewName("startPage");
 		}
 		
 		return mav;
