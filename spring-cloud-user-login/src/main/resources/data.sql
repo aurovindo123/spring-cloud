@@ -1,1 +1,1 @@
-INSERT into USER_AUTH values('arbind','arbind');
+INSERT into USER_AUTH values(1,'arbind','arbind');

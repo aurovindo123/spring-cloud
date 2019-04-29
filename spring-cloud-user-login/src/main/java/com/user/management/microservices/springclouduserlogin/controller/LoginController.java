@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.user.management.microservices.springclouduserlogin.repository.UserLoginRepository;
 import com.user.management.microservices.springclouduserlogin.repository.entity.UserAuth;
@@ -21,9 +22,17 @@ public class LoginController {
 	@Autowired
 	UserLoginRepository repository;
 	
-	@PostMapping("/login")
-	public void login(@RequestBody UserAuth auth) {
-		service.loginWithCredential(auth);
+	@GetMapping("/login/{userName}/{pass}")
+	public ModelAndView login(String userName, String pass) {
+		ModelAndView mav = new  ModelAndView();
+		boolean flag = service.loginWithCredential(userName,pass);
+		if(flag) {
+			mav.setViewName("startPage");
+		}else {
+			mav.setViewName("error");
+		}
+		
+		return mav;
 	}
 	
 	@GetMapping("/users")

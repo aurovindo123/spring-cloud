@@ -12,7 +12,11 @@ public class UserLoginService {
 	@Autowired
 	UserLoginRepository repository;
 	
-	public void loginWithCredential(UserAuth auth) {
-		repository.findByuserNameAndPassword(auth);
+	public boolean loginWithCredential(String userName, String pass) {
+		UserAuth user = repository.findByUserNameAndPass(userName, pass);
+		if(user!=null) {
+			return true;
+		}
+		return false;
 	}
 }

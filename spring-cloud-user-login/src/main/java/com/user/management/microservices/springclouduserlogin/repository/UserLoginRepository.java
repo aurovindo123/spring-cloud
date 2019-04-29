@@ -8,6 +8,6 @@ import com.user.management.microservices.springclouduserlogin.repository.entity.
 @Repository
 public interface UserLoginRepository extends JpaRepository<UserAuth, Integer>{
 
-	void findByuserNameAndPassword(UserAuth auth);
+	UserAuth findByUserNameAndPass(String userName, String pass);
 
 }
