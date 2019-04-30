@@ -12,12 +12,5 @@ public class SpringCloudUserLoginApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCloudUserLoginApplication.class, args);
 	}
-	 @Bean
-	    public InternalResourceViewResolver setupViewResolver()  {
-	        InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
-	        resolver.setPrefix ("/jsp/");
-	        resolver.setSuffix (".jsp");
-	        resolver.setViewClass (JstlView.class);
-	        return resolver;
-	    }
+	
 }

@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,15 +23,13 @@ public class LoginController {
 	UserLoginRepository repository;
 	
 	@GetMapping("/login/{userName}/{pass}")
-	public ModelAndView login(String userName, String pass) {
-		ModelAndView mav = new  ModelAndView();
+	public ModelAndView login(Model model, String userName, String pass) {
+		ModelAndView mav = new ModelAndView();
 		boolean flag = service.loginWithCredential(userName,pass);
 		if(flag) {
-			mav.setStatus(HttpStatus.ACCEPTED);
 			mav.setViewName("startPage");
 		}else {
-			mav.setStatus(HttpStatus.BAD_REQUEST);
-			mav.setViewName("startPage");
+			mav.setViewName("error");
 		}
 		
 		return mav;
@@ -41,5 +38,12 @@ public class LoginController {
 	@GetMapping("/users")
 	public List<UserAuth> getUser() {
 		return repository.findAll();
+	}
+	
+	@GetMapping("/views")
+	public ModelAndView view() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("index");
+		return mav;
 	}
 }
