@@ -50,4 +50,11 @@ public class LoginController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	@GetMapping("/theme")
+	public ModelAndView themeView() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("theme");
+		return mav;
+	}
 }
