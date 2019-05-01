@@ -26,7 +26,7 @@ public class LoginController {
 	UserLoginRepository repository;
 	
 	@GetMapping("/login/{userName}/{pass}")
-	public ModelAndView login(Model model,@PathVariable String userName,@PathVariable String pass) {
+	public ModelAndView login(@PathVariable String userName,@PathVariable String pass) {
 		ModelAndView mav = new ModelAndView();
 		logger.info("The User name is : "+userName);
 		boolean flag = service.loginWithCredential(userName,pass);
