@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @FeignClient(name="spring-cloud-user-login", url="http://localhost:8000")
 public interface FeignConfig {
 	
-	@GetMapping("/login/{userName}/{pass}")
-	public ModelAndView login(@PathVariable String userName,@PathVariable String pass);
+	@GetMapping("/validate/{userName}/{password}")
+	public boolean validate(@PathVariable String userName, @PathVariable String password);
 	
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,17 +46,8 @@ public class LoginController {
 		return repository.findAll();
 	}
 	
-	@GetMapping("/views")
-	public ModelAndView view() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
-	}
-	
-	@GetMapping("/theme")
-	public ModelAndView themeView() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("theme");
-		return mav;
+	@GetMapping(value="/validate/{userName}/{password}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public boolean validate(@PathVariable String userName, @PathVariable String password) {
+		return service.loginWithCredential(userName,password);
 	}
 }
