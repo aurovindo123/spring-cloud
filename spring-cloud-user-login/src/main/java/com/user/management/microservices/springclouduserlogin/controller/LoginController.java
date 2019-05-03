@@ -28,17 +28,15 @@ public class LoginController {
 	UserLoginRepository repository;
 	
 	@GetMapping("/login/{userName}/{pass}")
-	public ModelAndView login(@PathVariable String userName,@PathVariable String pass) {
-		ModelAndView mav = new ModelAndView();
+	public String login(@PathVariable String userName,@PathVariable String pass) {
 		logger.info("The User name is : "+userName);
 		boolean flag = service.loginWithCredential(userName,pass);
 		if(flag) {
-			mav.setViewName("startPage");
+			return "startPage";
 		}else {
-			mav.setViewName("error");
+			return "error";
 		}
 		
-		return mav;
 	}
 	
 	@GetMapping("/users")
