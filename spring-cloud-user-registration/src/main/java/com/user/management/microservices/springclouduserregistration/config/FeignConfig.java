@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @FeignClient(name="spring-cloud-user-login", url="http://localhost:8000")
+
 public interface FeignConfig {
 	
 	@GetMapping("/validate/{userName}/{password}")
